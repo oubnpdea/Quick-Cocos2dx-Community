@@ -78,6 +78,10 @@ function player:loadSetting(fileName)
 
     local data = file:read("*all")
     local func = loadstring("local settings = {" .. data .. "} return settings")
+    if func == nil then
+    	print ("Please check whether the '" .. fileName .. "' file contains unrecognized characters, or other errors can't read!")
+    	io.popen ("python  ".. __G_QUICK_V3_ROOT__ .."\\quick\\welcome\\src\\ErrPopups.py")
+    end	
     self.settings = func()
     self.settings.PLAYER_OPEN_RECENTS = self.settings.PLAYER_OPEN_RECENTS or {}
     file:close()
